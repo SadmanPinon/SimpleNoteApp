@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:id="@+id/note"
+
+
+    >
+        <Button
+                android:text="D"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteButton"
+                android:padding="10dp"
+
+
+
+        />
+        <Space
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+        >
+        </Space>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+        >
+
+            <TextView
+                    android:id="@+id/tv_titleText"
+                    android:text="DummyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                    android:id="@+id/tv_bodyText"
+                    android:text="The quick brown fox jumped over the tree into the unkown oh my boy,The quick brown
+                    fox jumped over the tree into the unkown oh my boy,The quick brown fox jumped over the tree into
+                    the unkown oh my boy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+            </TextView>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
