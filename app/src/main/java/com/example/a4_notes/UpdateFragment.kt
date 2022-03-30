@@ -1,14 +1,12 @@
 package com.example.a4_notes
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,11 +15,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
+ * Use the [UpdateFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
-
+class UpdateFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -32,7 +29,6 @@ class ListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -40,48 +36,13 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
-        view.findViewById<Button>(R.id.addButton).setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.navigateToUpdateFragment)
+        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        view.findViewById<Button>(R.id.updateButton).setOnClickListener{
+            Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
         }
-
-
-
-
         return view
-
-
-
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var randomButton = view.findViewById<Button>(R.id.randomButton)
-        var viewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
-        var clearButton = view.findViewById<Button>(R.id.clearButton)
-//        val addButton = view.findViewById<Button>(R.id.addButton)
-
-
-        randomButton.setOnClickListener{
-            viewModel.randomNote()
-        }
-        clearButton.setOnClickListener{
-            viewModel.clearNotes()
-        }
-
-
-
-
-
-//        deleteButton.setOnClickListener{
-//            /*viewModel.deleteNote(view)*/
-//            print("delete requested")
-//
-//        }
-    }
-
-    }
 
     companion object {
         /**
@@ -90,13 +51,12 @@ class ListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
+         * @return A new instance of fragment UpdateFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-
         fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
+            UpdateFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

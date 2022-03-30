@@ -7,10 +7,15 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ListView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
     private lateinit var listView : ListView
     private lateinit var viewModel: MainActivityViewModel
+
+    companion object {
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        listView = findViewById(R.id.rvNotesView)
+        listView = findViewById(R.id.noteView)
         viewModel.displayList(listView,this)
 
 

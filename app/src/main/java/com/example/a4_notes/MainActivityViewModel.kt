@@ -18,12 +18,15 @@ class MainActivityViewModel(
     var clearButton : Button? = null
 
 
+
     fun displayList(listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
         if (classListView==null) classListView = listView
         if (thisContext==null) {
             thisContext = context
             clearButton = thisContext!!.findViewById<Button>(R.id.clearButton)
+
         }
+
 
 //        dataList.add(NoteData("Test","This is just a test"))
 //        dataList.add(NoteData("Test1","This is just a test"))
@@ -40,6 +43,7 @@ class MainActivityViewModel(
             thisAdapter = NotesAdapter(context, dataList,this)
 
         listView.adapter = thisAdapter
+
     }
 
 
@@ -66,7 +70,7 @@ class MainActivityViewModel(
         message = if (action=="cleared") "Cleared all Notes";
         else "${action} Note#${index}"
 
-        val listPage = thisContext!!.findViewById<ListView>(R.id.rvNotesView)
+        val listPage = thisContext!!.findViewById<ListView>(R.id.noteView)
         Snackbar.make(
             listPage,
             message,
