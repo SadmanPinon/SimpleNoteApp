@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
 
 class NotesAdapter(
     private val context: Context,
-    private val dataSource: ArrayList<NoteData>
+    private val dataSource: ArrayList<NoteData>,
+    private val viewModel: MainActivityViewModel
 ) :BaseAdapter (){
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -31,13 +33,27 @@ class NotesAdapter(
 
         val titleTextView = noteView.findViewById(R.id.tv_titleText) as TextView
         val bodyTextView = noteView.findViewById(R.id.tv_bodyText) as TextView
-
+        val deleteButton = noteView.findViewById(R.id.deleteButton) as Button
+//        val note = noteView.findViewById(R.id.note) as LinearLayout
         val noteData = getItem(position) as NoteData
+        noteView.id= position
 
         titleTextView.text = noteData.title
         bodyTextView.text = noteData.body
+        deleteButton.id = position
+
+        deleteButton.setOnClickListener{
+            dataSource.removeAt(position)
+            notifyDataSetChanged()
+
+        }
 
         return noteView
     }
+
+//    fun remove(position: Int) {
+//        dataSource.remove(dataSource[position])
+//
+//    }
 
 }

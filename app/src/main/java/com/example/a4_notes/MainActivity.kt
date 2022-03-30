@@ -2,6 +2,7 @@ package com.example.a4_notes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
 
+
         listView = findViewById(R.id.rvNotesView)
         viewModel.displayList(listView,this)
 
@@ -26,6 +28,11 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+//    fun deleteNote(button: View){
+//        print("I was called")
+//        viewModel.deleteNote(button)
+//    }
 
 
 
