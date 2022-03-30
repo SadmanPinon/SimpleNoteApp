@@ -49,12 +49,15 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var randomButton = view.findViewById<Button>(R.id.randomButton)
         var viewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
-        var deleteButton = view.findViewById<Button>(R.id.deleteButton)
+        var clearButton = view.findViewById<Button>(R.id.clearButton)
 
 
 
         randomButton.setOnClickListener{
             viewModel.randomNote()
+        }
+        clearButton.setOnClickListener{
+            viewModel.clearNotes()
         }
 
 //        deleteButton.setOnClickListener{

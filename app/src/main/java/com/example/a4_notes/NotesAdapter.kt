@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
 
 class NotesAdapter(
     private val context: Context,
@@ -44,16 +45,17 @@ class NotesAdapter(
 
         deleteButton.setOnClickListener{
             dataSource.removeAt(position)
+            viewModel.callSnackbar(position,"Deleted")
             notifyDataSetChanged()
+
 
         }
 
         return noteView
     }
 
-//    fun remove(position: Int) {
-//        dataSource.remove(dataSource[position])
-//
-//    }
+
+
+
 
 }
