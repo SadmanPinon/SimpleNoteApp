@@ -1,11 +1,13 @@
 package com.example.a4_notes
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 
@@ -35,8 +37,10 @@ class NotesAdapter(
         val titleTextView = noteView.findViewById(R.id.tv_titleText) as TextView
         val bodyTextView = noteView.findViewById(R.id.tv_bodyText) as TextView
         val deleteButton = noteView.findViewById(R.id.deleteButton) as Button
-//        val note = noteView.findViewById(R.id.note) as LinearLayout
+        val note = noteView.findViewById(R.id.note) as LinearLayout
         val noteData = getItem(position) as NoteData
+
+        if (noteData.isImportant) note.setBackgroundColor(Color.parseColor("#FFB6C1"))
         noteView.id= position
 
         titleTextView.text = noteData.title

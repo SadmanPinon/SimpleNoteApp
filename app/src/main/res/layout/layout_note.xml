@@ -3,9 +3,11 @@
     <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="65dp"
             android:orientation="horizontal"
             android:id="@+id/note"
+
+            android:padding="5dp"
 
 
     >
@@ -14,7 +16,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/deleteButton"
-                android:padding="10dp"
+                android:padding="1dp"
 
 
 
