@@ -45,7 +45,7 @@ class NotesAdapter(
 
         deleteButton.setOnClickListener{
             dataSource.removeAt(position)
-            MainActivityViewModel.callSnackbar(position,"Deleted")
+//            MainActivityViewModel.callSnackbar("Deleted Note# $position")
             notifyDataSetChanged()
 
 

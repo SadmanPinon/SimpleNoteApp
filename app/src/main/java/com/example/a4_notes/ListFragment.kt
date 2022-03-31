@@ -42,6 +42,7 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         view.findViewById<Button>(R.id.addButton).setOnClickListener{
+            MainActivityViewModel.addButtonCalled = true
             Navigation.findNavController(view).navigate(R.id.navigateToUpdateFragment)
         }
 
@@ -59,6 +60,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         var randomButton = view.findViewById<Button>(R.id.randomButton)
         var viewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
         var clearButton = view.findViewById<Button>(R.id.clearButton)
@@ -81,11 +83,7 @@ class ListFragment : Fragment() {
 
 
 
-//        deleteButton.setOnClickListener{
-//            /*viewModel.deleteNote(view)*/
-//            print("delete requested")
-//
-//        }
+
     }
 
 

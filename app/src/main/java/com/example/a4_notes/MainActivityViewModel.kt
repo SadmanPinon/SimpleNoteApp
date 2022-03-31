@@ -17,11 +17,13 @@ class MainActivityViewModel(
 
     companion object {
         private var dataList: ArrayList<NoteData> = ArrayList()
-
+        var addButtonCalled:Boolean = true
+        var recentUpdate:String = "Welcome!"
         var classListView: ListView? = null
         var thisContext: MainActivity? = null
         var thisAdapter : NotesAdapter? = null
         var clearButton : Button? = null
+
 
         fun displayList(listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
 //        if (classListView==null) classListView = listView
@@ -48,6 +50,8 @@ class MainActivityViewModel(
 
             listView.adapter = thisAdapter
 
+
+
         }
 
 
@@ -58,35 +62,43 @@ class MainActivityViewModel(
             if (dataList.size!=0)
                 clearButton!!.isEnabled = true
 
-            callSnackbar(action = "Added")
+//            callSnackbar(message = "Added Note #${dataList.size-1}")
             thisAdapter!!.notifyDataSetChanged()
 
         }
 
         fun clearNotes() {
             dataList.clear()
-            callSnackbar(action = "cleared")
+//            callSnackbar(message = "Cleared all notes")
             thisAdapter!!.notifyDataSetChanged()
         }
 
-        fun callSnackbar(index: Int=0, action: String) {
-            var message:String
-            message = if (action=="cleared") "Cleared all Notes";
-            else "${action} Note#${index}"
+//        fun callSnackbar( message: String= recentUpdate) {
+//            if (recentUpdate== "") return
+//
+//            val listPage = thisContext!!.findViewById<ListView>(R.id.noteView)
+//            Snackbar.make(
+//                listPage,
+//                message,
+//                Snackbar.LENGTH_LONG
+//            )
+//                .setAnchorView(thisContext!!.findViewById<LinearLayout>(R.id.linearLayout3))
+//                .show()
+//            if (dataList.size==0)
+//                clearButton!!.isEnabled = false
+//
+//            recentUpdate = ""
+//
+//
+//        }
 
-            val listPage = thisContext!!.findViewById<ListView>(R.id.noteView)
-            Snackbar.make(
-                listPage,
-                message,
-                Snackbar.LENGTH_LONG
-            )
-                .setAnchorView(thisContext!!.findViewById<LinearLayout>(R.id.linearLayout3))
-                .show()
-            if (dataList.size==0)
-                clearButton!!.isEnabled = false
-
-
+        fun addNewNote(title:String,body:String,isImportant:Boolean){
+            dataList.add(NoteData(title,body,isImportant))
+            thisAdapter!!.notifyDataSetChanged()
+            recentUpdate = "Added Note #${dataList.size-1}"
         }
+
+
 
     }
 
