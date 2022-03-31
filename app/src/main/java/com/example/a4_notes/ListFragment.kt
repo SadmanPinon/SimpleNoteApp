@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -32,7 +33,6 @@ class ListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -44,6 +44,8 @@ class ListFragment : Fragment() {
         view.findViewById<Button>(R.id.addButton).setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.navigateToUpdateFragment)
         }
+
+
 
 
 
@@ -61,13 +63,18 @@ class ListFragment : Fragment() {
         var viewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
         var clearButton = view.findViewById<Button>(R.id.clearButton)
 //        val addButton = view.findViewById<Button>(R.id.addButton)
+        var listView = view.findViewById<ListView>(R.id.noteView)
+        MainActivityViewModel.classListView = listView
+        MainActivityViewModel.clearButton = clearButton
 
+
+        MainActivityViewModel.displayList()
 
         randomButton.setOnClickListener{
-            viewModel.randomNote()
+            MainActivityViewModel.randomNote()
         }
         clearButton.setOnClickListener{
-            viewModel.clearNotes()
+            MainActivityViewModel.clearNotes()
         }
 
 
@@ -81,7 +88,7 @@ class ListFragment : Fragment() {
 //        }
     }
 
-    }
+
 
     companion object {
         /**

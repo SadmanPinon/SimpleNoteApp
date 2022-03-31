@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 class NotesAdapter(
     private val context: Context,
     private val dataSource: ArrayList<NoteData>,
-    private val viewModel: MainActivityViewModel
+
 ) :BaseAdapter (){
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -45,7 +45,7 @@ class NotesAdapter(
 
         deleteButton.setOnClickListener{
             dataSource.removeAt(position)
-            viewModel.callSnackbar(position,"Deleted")
+            MainActivityViewModel.callSnackbar(position,"Deleted")
             notifyDataSetChanged()
 
 

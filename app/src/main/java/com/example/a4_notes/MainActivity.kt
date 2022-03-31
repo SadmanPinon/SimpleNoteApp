@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var listView : ListView
+//    private lateinit var listView : ListView
     private lateinit var viewModel: MainActivityViewModel
 
     companion object {
@@ -18,17 +18,17 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         title = "A4 Notes (20987455)"
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
 
 
-        listView = findViewById(R.id.noteView)
-        viewModel.displayList(listView,this)
+
+        MainActivityViewModel.thisContext = this
 
 
-
+        setContentView(R.layout.activity_main)
 
 
 
