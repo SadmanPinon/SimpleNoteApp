@@ -57,7 +57,8 @@ class MainActivityViewModel(
 
 
         fun randomNote(){
-            dataList.add(NoteData("Random","Random Body Just testing things out"))
+            val isImportant = Math.random() >= 1.0 - 0.2
+            dataList.add(NoteData("Random","Random Body Just testing things out",isImportant))
 
             if (dataList.size!=0)
                 clearButton!!.isEnabled = true
