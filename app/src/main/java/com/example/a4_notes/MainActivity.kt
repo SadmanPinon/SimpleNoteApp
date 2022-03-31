@@ -21,16 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         title = "A4 Notes (20987455)"
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-
-
-
-
         MainActivityViewModel.thisContext = this
-
-
         setContentView(R.layout.activity_main)
-
-
 
     }
 

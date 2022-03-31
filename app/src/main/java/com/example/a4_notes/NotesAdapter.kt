@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
 
 class NotesAdapter(
     private val context: Context,
@@ -47,12 +46,17 @@ class NotesAdapter(
         bodyTextView.text = noteData.body
         deleteButton.id = position
 
+
+
         deleteButton.setOnClickListener{
             dataSource.removeAt(position)
 //            MainActivityViewModel.callSnackbar("Deleted Note# $position")
             notifyDataSetChanged()
+        }
 
-
+        noteView.findViewById<LinearLayout>(R.id.clickingZone).setOnClickListener{
+            NoteData.selectedNote = dataSource[position]
+            ListFragment.navigate(noteData,position)
         }
 
         return noteView

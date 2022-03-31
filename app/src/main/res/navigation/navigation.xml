@@ -7,9 +7,24 @@
     <fragment android:id="@+id/listFragment" android:name="com.example.a4_notes.ListFragment"
               android:label="fragment_list" tools:layout="@layout/fragment_list">
         <action android:id="@+id/navigateToUpdateFragment" app:destination="@id/updateFragment"/>
+        <action android:id="@+id/action_listFragment_to_readNoteFragment" app:destination="@id/readNoteFragment"/>
     </fragment>
     <fragment android:id="@+id/updateFragment" android:name="com.example.a4_notes.UpdateFragment"
               android:label="fragment_update" tools:layout="@layout/fragment_update">
         <action android:id="@+id/navigateToHomeFragment" app:destination="@id/listFragment"/>
+        <argument android:name="title" app:argType="string"/>
+        <argument android:name="body" app:argType="string"/>
+        <argument android:name="isImportant" app:argType="boolean"/>
+        <argument android:name="position" app:argType="integer"/>
+        <argument android:name="buttonName" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/readNoteFragment" android:name="com.example.a4_notes.ReadNoteFragment"
+              android:label="fragment_read_note" tools:layout="@layout/fragment_read_note">
+        <action android:id="@+id/action_readNoteFragment_to_updateFragment" app:destination="@id/updateFragment"/>
+        <action android:id="@+id/action_readNoteFragment_to_listFragment" app:destination="@id/listFragment"/>
+        <argument android:name="title" app:argType="string"/>
+        <argument android:name="body" app:argType="string"/>
+        <argument android:name="isImportant" app:argType="boolean"/>
+        <argument android:name="position" app:argType="integer"/>
     </fragment>
 </navigation>

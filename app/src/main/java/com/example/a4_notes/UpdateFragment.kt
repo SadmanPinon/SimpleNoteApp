@@ -41,6 +41,7 @@ class UpdateFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update, container, false)
+
         var headerText = view.findViewById<TextView>(R.id.headerText)
 
         var editText = view.findViewById<EditText>(R.id.titleText)
@@ -48,12 +49,32 @@ class UpdateFragment : Fragment() {
         var isImportantView =  view.findViewById<Switch>(R.id.isImportantView)
 
 
+        if (arguments!=null){
+            arguments?.apply {
+                editText.setText(getString("title"))
+                bodytext.setText(getString("body"))
+                isImportantView.isChecked = getBoolean("isImportant")
+                headerText.setText("Edit Note #${getString("position")}")
+            }
+
+        }
+
         view.findViewById<Button>(R.id.updateButton).setOnClickListener{
-            MainActivityViewModel.addNewNote(
-                editText.text.toString(),
-                bodytext.text.toString(),
-                isImportantView.isChecked
-            )
+            if (arguments!=null) {
+                MainActivityViewModel.replaceNote(
+                    editText.text.toString(),
+                    bodytext.text.toString(),
+                    isImportantView.isChecked
+                )
+            }
+            else{
+                MainActivityViewModel.addNewNote(
+                    editText.text.toString(),
+                    bodytext.text.toString(),
+                    isImportantView.isChecked
+                )
+            }
+
             Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
 
         }
@@ -70,6 +91,8 @@ class UpdateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
     }
 

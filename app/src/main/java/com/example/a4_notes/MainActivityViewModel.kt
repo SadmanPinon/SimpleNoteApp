@@ -1,6 +1,7 @@
 package com.example.a4_notes
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -16,6 +17,7 @@ class MainActivityViewModel(
 
 
     companion object {
+        var HomeFragmentView: View? = null
         private var dataList: ArrayList<NoteData> = ArrayList()
         var addButtonCalled:Boolean = true
         var recentUpdate:String = "Welcome!"
@@ -25,31 +27,15 @@ class MainActivityViewModel(
         var clearButton : Button? = null
 
 
+
         fun displayList(listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
-//        if (classListView==null) classListView = listView
-//        if (thisContext==null) {
-//            thisContext = context
-//            clearButton = thisContext!!.findViewById<Button>(R.id.clearButton)
-//
-//        }
 
-
-//        dataList.add(NoteData("Test","This is just a test"))
-//        dataList.add(NoteData("Test1","This is just a test"))
-//        dataList.add(NoteData("Test2","This is just a test"))
-//        dataList.add(NoteData("Test3","This is just a test"))
-//        dataList.add(NoteData("Test4","This is just a test"))
-//        dataList.add(NoteData("Test5","This is just a test"))
-//        dataList.add(NoteData("Test6","This is just a test"))
-//        dataList.add(NoteData("Test7","This is just a test"))
-//        dataList.add(NoteData("Test8","This is just a test"))
-//        dataList.add(NoteData("Test9","This is just a test"))
-//        dataList.add(NoteData("Test0","This is just a test"))
             if (thisAdapter==null)
                 thisAdapter = NotesAdapter(context, dataList)
 
             listView.adapter = thisAdapter
-
+            if (dataList.size!=0)
+                clearButton!!.isEnabled = true
 
 
         }
@@ -71,6 +57,8 @@ class MainActivityViewModel(
         fun clearNotes() {
             dataList.clear()
 //            callSnackbar(message = "Cleared all notes")
+            if (dataList.size==0)
+                clearButton!!.isEnabled = false
             thisAdapter!!.notifyDataSetChanged()
         }
 
@@ -99,6 +87,11 @@ class MainActivityViewModel(
             recentUpdate = "Added Note #${dataList.size-1}"
         }
 
+        fun replaceNote(title:String,body:String,isImportant:Boolean) {
+            dataList.remove(NoteData.selectedNote)
+            addNewNote(title,body,isImportant)
+
+        }
 
 
     }

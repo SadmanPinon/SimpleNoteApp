@@ -33,6 +33,8 @@ class ListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -41,14 +43,11 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
+        MainActivityViewModel.HomeFragmentView = view
         view.findViewById<Button>(R.id.addButton).setOnClickListener{
             MainActivityViewModel.addButtonCalled = true
             Navigation.findNavController(view).navigate(R.id.navigateToUpdateFragment)
         }
-
-
-
-
 
 
         return view
@@ -84,11 +83,29 @@ class ListFragment : Fragment() {
 
 
 
+
+
+
     }
 
 
 
+
+
     companion object {
+
+        fun navigate(noteData: NoteData, position: Int) {
+
+            Navigation.findNavController(
+                MainActivityViewModel.HomeFragmentView!!).navigate(R.id.action_listFragment_to_readNoteFragment,
+                args = Bundle().apply {
+                    putString("title",noteData.title)
+                    putString("body",noteData.body)
+                    putBoolean("isImportant",noteData.isImportant)
+                    putInt("position",position)
+                }
+            )
+        }
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

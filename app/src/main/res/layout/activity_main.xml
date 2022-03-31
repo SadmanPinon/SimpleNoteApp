@@ -22,9 +22,9 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation"
 
-    >
+    />
 
-    </fragment>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

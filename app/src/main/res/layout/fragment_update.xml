@@ -32,7 +32,7 @@
             android:layout_marginTop="16dp"/>
     <EditText
 
-            android:id="@+id/titleText"
+            android:id="@+id/bodyText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_conversion_absoluteHeight="45dp"
@@ -44,7 +44,7 @@
     <EditText
 
 
-            android:id="@+id/bodyText"
+            android:id="@+id/titleText"
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/isImportantView"/>
     <Button
-            android:text="Button"
+            android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/updateButton"
 
