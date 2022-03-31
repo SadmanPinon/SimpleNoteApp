@@ -1,11 +1,15 @@
 package com.example.a4_notes
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -50,6 +54,7 @@ class ListFragment : Fragment() {
         }
 
 
+
         return view
 
 
@@ -69,7 +74,28 @@ class ListFragment : Fragment() {
         MainActivityViewModel.clearButton = clearButton
 
 
-        MainActivityViewModel.displayList()
+        var isImportantSwitch = view.findViewById<Switch>(R.id.switchToggle)
+        var searchField = view.findViewById<EditText>(R.id.searchField)
+        searchField.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                MainActivityViewModel.displayList(searchField.text.toString(),isImportantSwitch.isChecked)
+            }
+        })
+
+        isImportantSwitch.setOnClickListener{
+            MainActivityViewModel.displayList(searchField.text.toString(),isImportantSwitch.isChecked)
+        }
+
+
+        MainActivityViewModel.displayList(searchField.text.toString(),isImportantSwitch.isChecked)
 
         randomButton.setOnClickListener{
             MainActivityViewModel.randomNote()

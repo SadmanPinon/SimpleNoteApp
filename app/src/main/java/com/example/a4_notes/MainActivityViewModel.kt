@@ -19,23 +19,30 @@ class MainActivityViewModel(
     companion object {
         var HomeFragmentView: View? = null
         private var dataList: ArrayList<NoteData> = ArrayList()
+
         var addButtonCalled:Boolean = true
         var recentUpdate:String = "Welcome!"
         var classListView: ListView? = null
         var thisContext: MainActivity? = null
         var thisAdapter : NotesAdapter? = null
         var clearButton : Button? = null
+        var currentSearchState: String = ""
+        var currentIsImportantState: Boolean = false
 
 
 
-        fun displayList(listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
+        fun displayList(target: String= currentSearchState, isImportant: Boolean= currentIsImportantState, listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
+            currentSearchState = target
+            currentIsImportantState = isImportant
 
-            if (thisAdapter==null)
-                thisAdapter = NotesAdapter(context, dataList)
+            var filteredList = filter(target,isImportant)
+            thisAdapter = NotesAdapter(context, filteredList)
+//            if (thisAdapter==null)
+//                thisAdapter = NotesAdapter(context, filteredList)
 
             listView.adapter = thisAdapter
-            if (dataList.size!=0)
-                clearButton!!.isEnabled = true
+            clearButton!!.isEnabled = filteredList.size!=0
+            println("Target is $target")
 
 
         }
@@ -50,6 +57,7 @@ class MainActivityViewModel(
                 clearButton!!.isEnabled = true
 
 //            callSnackbar(message = "Added Note #${dataList.size-1}")
+            displayList()
             thisAdapter!!.notifyDataSetChanged()
 
         }
@@ -60,6 +68,7 @@ class MainActivityViewModel(
             if (dataList.size==0)
                 clearButton!!.isEnabled = false
             thisAdapter!!.notifyDataSetChanged()
+            displayList()
         }
 
 //        fun callSnackbar( message: String= recentUpdate) {
@@ -92,6 +101,22 @@ class MainActivityViewModel(
             addNewNote(title,body,isImportant)
 
         }
+
+        fun filter(target:String,isImportant: Boolean): ArrayList<NoteData> {
+
+            var filteredList = ArrayList<NoteData>()
+            for (note in dataList){
+                if (isImportant){
+                    if (!note.isImportant) continue
+                }
+                if ((note.title.lowercase().contains(target.lowercase())) || (note.body.lowercase().contains(target.lowercase())))
+                    filteredList.add(note)
+            }
+            println("Size is $filteredList")
+            return filteredList
+        }
+
+
 
 
     }
