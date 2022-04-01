@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-//    private lateinit var listView : ListView
+
     private lateinit var viewModel: MainActivityViewModel
 
     companion object {
@@ -21,26 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        title = "A4 Notes (20987455)"
-
+        title = "A4 Notes (20987455)" //Setting title
+        //Initialize ViewModel
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        MainActivityViewModel.thisContext = this
+        MainActivityViewModel.thisContext = this //Set Context for ViewModel
         setContentView(R.layout.activity_main)
 
 
 
     }
-
-
-
-//    fun deleteNote(button: View){
-//        print("I was called")
-//        viewModel.deleteNote(button)
-//    }
-
-
-
-
-
 
 }

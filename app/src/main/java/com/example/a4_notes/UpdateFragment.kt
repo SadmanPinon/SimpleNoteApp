@@ -12,27 +12,17 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.navigation.Navigation
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [UpdateFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment responsible for adding or Editing a note
  */
+
 class UpdateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -42,12 +32,13 @@ class UpdateFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update, container, false)
 
+        //Acessing views to modify data
         var headerText = view.findViewById<TextView>(R.id.headerText)
-
         var editText = view.findViewById<EditText>(R.id.titleText)
         var bodytext = view.findViewById<EditText>(R.id.bodyText)
         var isImportantView =  view.findViewById<Switch>(R.id.isImportantView)
 
+        //If data given to pre-populate fetch and update views
         headerText.text = "Add new Note"
         if (arguments!=null){
             arguments?.apply {
@@ -55,17 +46,17 @@ class UpdateFragment : Fragment() {
                 bodytext.setText(getString("body"))
                 isImportantView.isChecked = getBoolean("isImportant")
                 headerText.text = "Edit Note #${getInt("position")}"
-
-
             }
 
         }
 
+        //Change HeaderText depending on previous fragment in stack
         if (MainActivityViewModel.addButtonCalled){
             headerText.text = "Add new note"
             MainActivityViewModel.addButtonCalled = false
         }
 
+        //Update note or create new one
         view.findViewById<Button>(R.id.updateButton).setOnClickListener{
             if (arguments!=null) {
                 MainActivityViewModel.replaceNote(
@@ -88,40 +79,13 @@ class UpdateFragment : Fragment() {
         }
 
 
-
-
-
-
-
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
     }
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UpdateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UpdateFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

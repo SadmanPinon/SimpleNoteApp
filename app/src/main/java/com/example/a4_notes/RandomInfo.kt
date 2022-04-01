@@ -1,5 +1,8 @@
 import kotlin.random.Random
 
+/**
+ * From A1 , generates random note data
+ */
 class RandomInfo {
     private val randomBody = mutableListOf<String>() //List containing possible all the body line options
     private val randomTitle = mutableListOf<String>() //List containing all the possible title choices
