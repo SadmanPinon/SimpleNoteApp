@@ -6,13 +6,12 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Switch
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,10 +32,8 @@ class ListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+
 
 
     }
@@ -49,9 +46,16 @@ class ListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         MainActivityViewModel.HomeFragmentView = view
         view.findViewById<Button>(R.id.addButton).setOnClickListener{
+
+            Navigation.findNavController(view).navigate(
+                R.id.navigateToUpdateFragment,
+
+            )
             MainActivityViewModel.addButtonCalled = true
-            Navigation.findNavController(view).navigate(R.id.navigateToUpdateFragment)
         }
+
+
+
 
 
 
@@ -118,7 +122,13 @@ class ListFragment : Fragment() {
 
 
 
+
+
+
+
+
     companion object {
+
 
         fun navigate(noteData: NoteData, position: Int) {
 

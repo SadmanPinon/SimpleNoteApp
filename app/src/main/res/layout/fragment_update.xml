@@ -14,7 +14,8 @@
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textStyle="bold"
+            android:textSize="20dp"
             tools:layout_conversion_absoluteHeight="19dp"
             tools:layout_conversion_absoluteWidth="58dp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"

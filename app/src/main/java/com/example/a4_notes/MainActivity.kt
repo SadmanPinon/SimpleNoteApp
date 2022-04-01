@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ListView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 //    private lateinit var listView : ListView
@@ -20,11 +22,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         title = "A4 Notes (20987455)"
+
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         MainActivityViewModel.thisContext = this
         setContentView(R.layout.activity_main)
 
+
+
     }
+
+
 
 //    fun deleteNote(button: View){
 //        print("I was called")

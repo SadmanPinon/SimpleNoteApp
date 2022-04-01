@@ -1,5 +1,7 @@
 package com.example.a4_notes
 
+import RandomInfo
+import android.os.Message
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -20,15 +22,16 @@ class MainActivityViewModel(
         var HomeFragmentView: View? = null
         private var dataList: ArrayList<NoteData> = ArrayList()
 
-        var addButtonCalled:Boolean = true
-        var recentUpdate:String = "Welcome!"
+
+
+
         var classListView: ListView? = null
         var thisContext: MainActivity? = null
         var thisAdapter : NotesAdapter? = null
         var clearButton : Button? = null
         var currentSearchState: String = ""
         var currentIsImportantState: Boolean = false
-
+        var addButtonCalled : Boolean = false
 
 
         fun displayList(target: String= currentSearchState, isImportant: Boolean= currentIsImportantState, listView: ListView = classListView!!, context: MainActivity = thisContext!!) {
@@ -42,33 +45,42 @@ class MainActivityViewModel(
 
             listView.adapter = thisAdapter
             clearButton!!.isEnabled = filteredList.size!=0
-            println("Target is $target")
 
+
+
+            thisContext!!.supportActionBar!!.subtitle = "(${MainActivityViewModel.getDataSize()} notes)"
 
         }
 
 
 
         fun randomNote(){
-            val isImportant = Math.random() >= 1.0 - 0.2
-            dataList.add(NoteData("Random","Random Body Just testing things out",isImportant))
+            var data = RandomInfo()
+            dataList.add(NoteData(data.getRandomTitle(),data.getRandomBody(),data.getRandomBoolean()))
 
             if (dataList.size!=0)
                 clearButton!!.isEnabled = true
 
-//            callSnackbar(message = "Added Note #${dataList.size-1}")
+
+
             displayList()
+            callSnackbar(message = "Added Note #${dataList.size-1}")
             thisAdapter!!.notifyDataSetChanged()
+
+//            thisContext!!.makeSnackbar("Created Note#${dataList.size-1}")
 
         }
 
         fun clearNotes() {
             dataList.clear()
-//            callSnackbar(message = "Cleared all notes")
+
             if (dataList.size==0)
                 clearButton!!.isEnabled = false
             thisAdapter!!.notifyDataSetChanged()
+
             displayList()
+            callSnackbar(message = "Cleared all notes")
+//            thisContext!!.makeSnackbar("Cleared all notes")
         }
 
 //        fun callSnackbar( message: String= recentUpdate) {
@@ -93,13 +105,20 @@ class MainActivityViewModel(
         fun addNewNote(title:String,body:String,isImportant:Boolean){
             dataList.add(NoteData(title,body,isImportant))
             thisAdapter!!.notifyDataSetChanged()
-            recentUpdate = "Added Note #${dataList.size-1}"
+
+//            thisContext!!.makeSnackbar(
+//
+//            )
+
         }
 
         fun replaceNote(title:String,body:String,isImportant:Boolean) {
             dataList.remove(NoteData.selectedNote)
             addNewNote(title,body,isImportant)
 
+//            thisContext!!.makeSnackbar(
+//
+//            )
         }
 
         fun filter(target:String,isImportant: Boolean): ArrayList<NoteData> {
@@ -114,6 +133,21 @@ class MainActivityViewModel(
             }
             println("Size is $filteredList")
             return filteredList
+        }
+
+        fun callSnackbar(message: String){
+
+            Snackbar.make(
+                thisContext!!.findViewById<LinearLayout>(R.id.topBar),
+                message,
+                Snackbar.LENGTH_LONG
+            ).setAnchorView(thisContext!!.findViewById<LinearLayout>(R.id.bottomBar))
+                .show()
+
+        }
+
+        fun getDataSize(): Int {
+            return dataList.size
         }
 
 

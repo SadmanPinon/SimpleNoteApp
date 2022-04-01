@@ -48,15 +48,22 @@ class UpdateFragment : Fragment() {
         var bodytext = view.findViewById<EditText>(R.id.bodyText)
         var isImportantView =  view.findViewById<Switch>(R.id.isImportantView)
 
-
+        headerText.text = "Add new Note"
         if (arguments!=null){
             arguments?.apply {
                 editText.setText(getString("title"))
                 bodytext.setText(getString("body"))
                 isImportantView.isChecked = getBoolean("isImportant")
-                headerText.setText("Edit Note #${getString("position")}")
+                headerText.text = "Edit Note #${getInt("position")}"
+
+
             }
 
+        }
+
+        if (MainActivityViewModel.addButtonCalled){
+            headerText.text = "Add new note"
+            MainActivityViewModel.addButtonCalled = false
         }
 
         view.findViewById<Button>(R.id.updateButton).setOnClickListener{
@@ -73,6 +80,7 @@ class UpdateFragment : Fragment() {
                     bodytext.text.toString(),
                     isImportantView.isChecked
                 )
+
             }
 
             Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
@@ -82,9 +90,9 @@ class UpdateFragment : Fragment() {
 
 
 
-        if (MainActivityViewModel.addButtonCalled){
-            headerText.text = "Add new Note"
-        }
+
+
+
 
         return view
     }

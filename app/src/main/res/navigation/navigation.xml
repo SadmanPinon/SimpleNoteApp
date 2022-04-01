@@ -8,6 +8,7 @@
               android:label="fragment_list" tools:layout="@layout/fragment_list">
         <action android:id="@+id/navigateToUpdateFragment" app:destination="@id/updateFragment"/>
         <action android:id="@+id/action_listFragment_to_readNoteFragment" app:destination="@id/readNoteFragment"/>
+        <argument android:name="message" app:argType="string"/>
     </fragment>
     <fragment android:id="@+id/updateFragment" android:name="com.example.a4_notes.UpdateFragment"
               android:label="fragment_update" tools:layout="@layout/fragment_update">
@@ -17,6 +18,7 @@
         <argument android:name="isImportant" app:argType="boolean"/>
         <argument android:name="position" app:argType="integer"/>
         <argument android:name="buttonName" app:argType="string"/>
+        <argument android:name="addButtonCalled" app:argType="boolean"/>
     </fragment>
     <fragment android:id="@+id/readNoteFragment" android:name="com.example.a4_notes.ReadNoteFragment"
               android:label="fragment_read_note" tools:layout="@layout/fragment_read_note">
